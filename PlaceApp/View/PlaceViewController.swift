@@ -80,7 +80,7 @@ private extension PlaceViewController {
         guard let text = searchTextField.text
         else { return nil }
         let replaced = text.lowercased().replacingOccurrences(of: " ", with: "")
-        if replaced.isEmpty { return nil}
+        if replaced.isEmpty { return nil }
 
         return replaced
     }

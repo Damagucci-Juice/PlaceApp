@@ -10,14 +10,14 @@ import Kingfisher
 
 final class CityTableViewCell: UITableViewCell {
 
-    static let identifier = "CityTableViewCell"
-
     @IBOutlet var backgroundPaddingView: UIView!
     @IBOutlet var descriptionBackgrounView: UIView!
     
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
+
+    static private let failImage = UIImage(named: "defaultTourImage")
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,16 +35,24 @@ final class CityTableViewCell: UITableViewCell {
         titleLabel.setAttributedText(item.title, keyword)
         descriptionLabel.setAttributedText(item.explain, keyword)
 
-        if let url = URL(string: item.image) {
-            posterImageView.kf.setImage(with: url)
-        }
+        guard let url = URL(string: item.image) else { return }
+        posterImageView
+            .kf
+            .setImage(with: url) { [weak self] result in
+                // error handling
+                _ = result.mapError { [weak self] error in
+                    guard let self else { return error }
+                    self.posterImageView.image = Self.failImage
+                    return error
+                }
+            }
     }
 
-    // Cell Life Cycle 에 대해서 공부해야할 듯
+    // view drawing cycle 학습 필요
     override func layoutSubviews() {
         super.layoutSubviews()
-        posterImageView.layer.cornerRadius = posterImageView.frame.height / 2
-        posterImageView.clipsToBounds = true
+        
+//        setCircleCrop()
     }
 }
 
@@ -60,5 +68,11 @@ private extension CityTableViewCell {
 
         titleLabel.likeTitle()
         descriptionLabel.likeSecondary()
+    }
+
+    // MAKR: - 정원
+    func setCircleCrop() {
+        posterImageView.layer.cornerRadius = posterImageView.frame.height / 2
+        posterImageView.clipsToBounds = true
     }
 }

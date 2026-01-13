@@ -21,11 +21,8 @@
                         <rect key="frame" x="0.0" y="4" width="1503" height="571"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Yk-cG-FHa">
-                                <rect key="frame" x="466" y="0.0" width="571" height="571"/>
+                                <rect key="frame" x="16" y="0.0" width="1471" height="571"/>
                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="4Yk-cG-FHa" secondAttribute="height" multiplier="1:1" id="0rs-Bg-deh"/>
-                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방콕 | BangKok" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lvv-zi-a0G">
                                 <rect key="frame" x="1295.6666666666667" y="15.999999999999998" width="171.33333333333326" height="31.333333333333329"/>
@@ -54,14 +51,15 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
-                            <constraint firstItem="4Yk-cG-FHa" firstAttribute="top" secondItem="7to-iu-k6W" secondAttribute="top" id="DPv-du-oSl"/>
                             <constraint firstAttribute="trailing" secondItem="Lvv-zi-a0G" secondAttribute="trailing" constant="36" id="GA3-fb-Ezb"/>
                             <constraint firstItem="fo1-CK-5IB" firstAttribute="leading" secondItem="7to-iu-k6W" secondAttribute="leading" constant="16" id="S1s-t1-02J"/>
+                            <constraint firstAttribute="trailing" secondItem="4Yk-cG-FHa" secondAttribute="trailing" constant="16" id="SdQ-Xf-Lbo"/>
                             <constraint firstItem="Lvv-zi-a0G" firstAttribute="top" secondItem="7to-iu-k6W" secondAttribute="top" constant="16" id="WZu-EA-EGd"/>
                             <constraint firstAttribute="trailing" secondItem="fo1-CK-5IB" secondAttribute="trailing" constant="16" id="aDt-v6-65j"/>
-                            <constraint firstItem="4Yk-cG-FHa" firstAttribute="centerX" secondItem="7to-iu-k6W" secondAttribute="centerX" id="c58-rb-qgd"/>
+                            <constraint firstItem="4Yk-cG-FHa" firstAttribute="top" secondItem="7to-iu-k6W" secondAttribute="top" id="btK-IM-Xbd"/>
+                            <constraint firstAttribute="bottom" secondItem="4Yk-cG-FHa" secondAttribute="bottom" id="eTH-r2-UnK"/>
                             <constraint firstAttribute="bottom" secondItem="fo1-CK-5IB" secondAttribute="bottom" constant="1" id="jse-OZ-bUr"/>
-                            <constraint firstAttribute="bottom" secondItem="4Yk-cG-FHa" secondAttribute="bottom" id="od1-N2-3PW"/>
+                            <constraint firstItem="4Yk-cG-FHa" firstAttribute="leading" secondItem="7to-iu-k6W" secondAttribute="leading" constant="16" id="kn4-WK-kTl"/>
                         </constraints>
                     </view>
                 </subviews>
