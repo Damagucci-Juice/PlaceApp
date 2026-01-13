@@ -6,10 +6,14 @@ struct City {
     let explain: String
     let image: String
     let isDomestic: Bool
+
+    var title: String {
+        "\(name) | \(englishName)"
+    }
 }
 
 struct CityInfo {
-    let city: [City] = [
+    static let city: [City] = [
         // MARK: - 국내 도시 (Domestic - 12개)
         City(name: "서울", englishName: "Seoul", explain: "서울, 남산타워, 롯데타워, 경복궁", image: "https://images.unsplash.com/photo-1546874177-9e664107314e?w=800", isDomestic: true),
         City(name: "부산", englishName: "Busan", explain: "부산, 해운대, 광안리, 감천문화마을", image: "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800", isDomestic: true),
@@ -82,17 +86,17 @@ struct CityInfo {
 // MARK: - 필터링 헬퍼 메서드
 extension CityInfo {
     /// 국내 여행지만 필터링
-    var domesticCities: [City] {
+    static var domesticCities: [City] {
         return city.filter { $0.isDomestic == true }
     }
     
     /// 해외 여행지만 필터링
-    var internationalCities: [City] {
+    static var internationalCities: [City] {
         return city.filter { $0.isDomestic == false }
     }
     
     /// 도시 이름으로 검색
-    func searchCity(keyword: String) -> [City] {
+    static func searchCity(keyword: String) -> [City] {
         return city.filter {
             $0.name.contains(keyword) ||
             $0.englishName.lowercased().contains(keyword.lowercased()) ||
