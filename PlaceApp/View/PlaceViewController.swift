@@ -21,15 +21,10 @@ final class PlaceViewController: UIViewController {
     }
 
     private var regionaryDataSource: [City] {
-        switch region {
-        case .all:
-            return CityInfo.city
-        case .domestic:
-            return CityInfo.domesticCities
-        case .oversea:
-            return  CityInfo.internationalCities
-        }
-
+        CityInfo.searchCity(
+            by: region,
+            keyword: searchKey()
+        )
     }
 
     override func viewDidLoad() {
@@ -38,14 +33,21 @@ final class PlaceViewController: UIViewController {
     }
 
     private func setupAttributes() {
-        navigationItem.title = "범죄 도시"
+        navigationItem.title = "인기 도시"
         setTableView()
+        setTextField()
         setHeaderSeparator()
         setSegmentedControl()
     }
 }
 
 private extension PlaceViewController {
+    func setTextField() {
+        [UIControl.Event.editingDidEndOnExit, .editingChanged].forEach {
+            searchTextField.addTarget(self, action: #selector(showSearchResult), for: $0)
+        }
+    }
+
     func setHeaderSeparator() {
         headerSeparator.backgroundColor = .lightGray
     }
@@ -72,6 +74,20 @@ private extension PlaceViewController {
         guard let newRegion = Region(rawValue: sender.selectedSegmentIndex) else { return }
 
         region = newRegion
+    }
+
+    private func searchKey() -> String? {
+        guard let text = searchTextField.text
+        else { return nil }
+        let replaced = text.lowercased().replacingOccurrences(of: " ", with: "")
+        if replaced.isEmpty { return nil}
+
+        return replaced
+    }
+
+    @objc
+    private func showSearchResult() {
+        tableView.reloadData()
     }
 }
 

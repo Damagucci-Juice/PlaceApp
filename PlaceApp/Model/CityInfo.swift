@@ -96,11 +96,25 @@ extension CityInfo {
     }
     
     /// 도시 이름으로 검색
-    static func searchCity(keyword: String) -> [City] {
-        return city.filter {
-            $0.name.contains(keyword) ||
-            $0.englishName.lowercased().contains(keyword.lowercased()) ||
-            $0.explain.contains(keyword)
+    static func searchCity(by region: Region, keyword: String?) -> [City] {
+        let selectedCities: [City]
+        switch region {
+        case .all:
+            selectedCities = city
+        case .domestic:
+            selectedCities = domesticCities
+        case .oversea:
+            selectedCities = internationalCities
         }
+        
+        if let keyword {
+            return selectedCities.filter {
+                $0.name.contains(keyword) ||
+                $0.englishName.lowercased().contains(keyword.lowercased()) ||
+                $0.explain.contains(keyword)
+            }
+        }
+        
+        return selectedCities
     }
 }
