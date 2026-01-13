@@ -46,6 +46,8 @@ private extension PlaceViewController {
         [UIControl.Event.editingDidEndOnExit, .editingChanged].forEach {
             searchTextField.addTarget(self, action: #selector(showSearchResult), for: $0)
         }
+
+        searchTextField.setDefaultStyle("어디로 떠나고 싶으신가요?")
     }
 
     func setHeaderSeparator() {
@@ -60,6 +62,7 @@ private extension PlaceViewController {
         tableView.separatorStyle = .none
 
         tableView.rowHeight = 200
+        tableView.backgroundColor = .clear
     }
 
     func setSegmentedControl() {

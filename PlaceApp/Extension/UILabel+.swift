@@ -10,7 +10,7 @@ import UIKit
 extension UILabel {
     func likeTitle() {
         font = .boldSystemFont(ofSize: 22)
-        textColor = .green
+        textColor = .white
         textAlignment = .right
         numberOfLines = 1
         backgroundColor = .clear
@@ -32,7 +32,6 @@ extension UILabel {
 
         let attributedTitle = NSMutableAttributedString(string: fullText)
         let givenRange =  (fullText.lowercased() as NSString).range(of: keyword)
-        attributedTitle.addAttribute(.font,             value: font,            range: givenRange)
         attributedTitle.addAttribute(.backgroundColor,  value: UIColor.orange,  range: givenRange)
         attributedTitle.addAttribute(.foregroundColor,  value: UIColor.white,   range: givenRange)
 

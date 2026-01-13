@@ -47,13 +47,6 @@ final class CityTableViewCell: UITableViewCell {
                 }
             }
     }
-
-    // view drawing cycle 학습 필요
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-//        setCircleCrop()
-    }
 }
 
 private extension CityTableViewCell {
@@ -68,6 +61,9 @@ private extension CityTableViewCell {
 
         titleLabel.likeTitle()
         descriptionLabel.likeSecondary()
+
+        posterImageView.setSpecificCorner([.layerMinXMinYCorner, .layerMaxXMaxYCorner], 20)
+        descriptionBackgrounView.setSpecificCorner([.layerMaxXMaxYCorner], 20)
     }
 
     // MAKR: - 정원
