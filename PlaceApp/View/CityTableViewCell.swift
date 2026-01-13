@@ -47,8 +47,8 @@ private extension CityTableViewCell {
         descriptionBackgrounView.setAlpha(0.5)
         posterImageView.setAlpha(0.5)
 //        posterImageView.contentMode = .scaleAspectFit // 비율 유지하고 맞닿은 변에 꽉 채움
-//        posterImageView.contentMode = .scaleAspectFill    // 비율을 유지하고 늘리면서 꽉채움
-        posterImageView.contentMode = .scaleToFill // 비율 상관없이 빈 공간이 나올 수 없게 꽉 채움
+        posterImageView.contentMode = .scaleAspectFill    // 비율을 유지하고 늘리면서 꽉채움
+//        posterImageView.contentMode = .scaleToFill  비율 상관없이 빈 공간이 나올 수 없게 꽉 채움
 
         titleLabel.likeTitle()
         descriptionLabel.likeSecondary()
