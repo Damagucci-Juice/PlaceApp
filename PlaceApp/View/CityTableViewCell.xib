@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fo1-CK-5IB">
-                                <rect key="frame" x="16" y="530" width="1471" height="40"/>
+                                <rect key="frame" x="16" y="531" width="1471" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방콕, 파타야, 후아힌, 코사멧, 코사무이" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Thu-Wv-DqJ">
                                         <rect key="frame" x="8" y="9.6666666666666288" width="1455" height="21"/>
@@ -58,7 +58,7 @@
                             <constraint firstAttribute="trailing" secondItem="fo1-CK-5IB" secondAttribute="trailing" constant="16" id="aDt-v6-65j"/>
                             <constraint firstItem="4Yk-cG-FHa" firstAttribute="top" secondItem="7to-iu-k6W" secondAttribute="top" id="btK-IM-Xbd"/>
                             <constraint firstAttribute="bottom" secondItem="4Yk-cG-FHa" secondAttribute="bottom" id="eTH-r2-UnK"/>
-                            <constraint firstAttribute="bottom" secondItem="fo1-CK-5IB" secondAttribute="bottom" constant="1" id="jse-OZ-bUr"/>
+                            <constraint firstAttribute="bottom" secondItem="fo1-CK-5IB" secondAttribute="bottom" id="jse-OZ-bUr"/>
                             <constraint firstItem="4Yk-cG-FHa" firstAttribute="leading" secondItem="7to-iu-k6W" secondAttribute="leading" constant="16" id="kn4-WK-kTl"/>
                         </constraints>
                     </view>

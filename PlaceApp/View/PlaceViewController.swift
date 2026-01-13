@@ -102,8 +102,8 @@ extension PlaceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.identifier, for: indexPath) as? CityTableViewCell else { return UITableViewCell() }
 
-        let item = regionaryDataSource[indexPath.row]
-        cell.configure(item, keyword: searchKey())
+        cell.configure(regionaryDataSource[indexPath.row], keyword: searchKey())
+        cell.selectionStyle = .none
         return cell
     }
 }
