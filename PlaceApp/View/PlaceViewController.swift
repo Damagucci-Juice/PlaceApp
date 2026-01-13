@@ -51,7 +51,8 @@ extension PlaceViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.identifier, for: indexPath) as? CityTableViewCell else { return UITableViewCell() }
 
         let item = CityInfo.city[indexPath.row]
-        cell.configure(item)
+        cell.configure(item,
+                       UIImage(systemName: "person.fill"))
 
         return cell
     }
