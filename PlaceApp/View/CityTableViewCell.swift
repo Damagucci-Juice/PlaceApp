@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CityTableViewCell: UITableViewCell {
 
@@ -31,10 +32,13 @@ final class CityTableViewCell: UITableViewCell {
         descriptionLabel.text = nil
     }
 
-    func configure(_ item: City, _ asset: UIImage?) {
-        titleLabel.text = item.title
-        descriptionLabel.text = item.explain
-        posterImageView.image = asset
+    func configure(_ item: City, keyword: String?) {
+        titleLabel.setAttributedText(item.title, keyword)
+        descriptionLabel.setAttributedText(item.explain, keyword)
+
+        if let url = URL(string: item.image) {
+            posterImageView.kf.setImage(with: url)
+        }
     }
 }
 
@@ -46,9 +50,7 @@ private extension CityTableViewCell {
 
         descriptionBackgrounView.setAlpha(0.5)
         posterImageView.setAlpha(0.5)
-//        posterImageView.contentMode = .scaleAspectFit // 비율 유지하고 맞닿은 변에 꽉 채움
-        posterImageView.contentMode = .scaleAspectFill    // 비율을 유지하고 늘리면서 꽉채움
-//        posterImageView.contentMode = .scaleToFill  비율 상관없이 빈 공간이 나올 수 없게 꽉 채움
+        posterImageView.contentMode = .scaleAspectFill
 
         titleLabel.likeTitle()
         descriptionLabel.likeSecondary()

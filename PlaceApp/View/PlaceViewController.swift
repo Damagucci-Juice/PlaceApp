@@ -100,9 +100,7 @@ extension PlaceViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.identifier, for: indexPath) as? CityTableViewCell else { return UITableViewCell() }
 
         let item = regionaryDataSource[indexPath.row]
-        cell.configure(item,
-                       UIImage(systemName: "person.fill"))
-
+        cell.configure(item, keyword: searchKey())
         return cell
     }
 }
