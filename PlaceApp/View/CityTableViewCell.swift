@@ -18,7 +18,6 @@ final class CityTableViewCell: UITableViewCell {
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +38,13 @@ final class CityTableViewCell: UITableViewCell {
         if let url = URL(string: item.image) {
             posterImageView.kf.setImage(with: url)
         }
+    }
+
+    // Cell Life Cycle 에 대해서 공부해야할 듯
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        posterImageView.layer.cornerRadius = posterImageView.frame.height / 2
+        posterImageView.clipsToBounds = true
     }
 }
 

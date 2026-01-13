@@ -31,12 +31,10 @@ extension UILabel {
         }
 
         let attributedTitle = NSMutableAttributedString(string: fullText)
-
-        attributedTitle.addAttribute(.font,
-                                     value: font,
-                                     range: (fullText.lowercased() as NSString).range(of: keyword))
-        attributedTitle.addAttribute(.backgroundColor, value: UIColor.orange, range: (fullText.lowercased() as NSString).range(of: keyword))
-        attributedTitle.addAttribute(.foregroundColor, value: UIColor.white, range: (fullText.lowercased() as NSString).range(of: keyword))
+        let givenRange =  (fullText.lowercased() as NSString).range(of: keyword)
+        attributedTitle.addAttribute(.font,             value: font,            range: givenRange)
+        attributedTitle.addAttribute(.backgroundColor,  value: UIColor.orange,  range: givenRange)
+        attributedTitle.addAttribute(.foregroundColor,  value: UIColor.white,   range: givenRange)
 
         attributedText = attributedTitle
     }

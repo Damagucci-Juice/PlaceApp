@@ -11,7 +11,7 @@ extension UIView {
     func setAlpha(_ value: CGFloat) {
         backgroundColor = backgroundColor?.withAlphaComponent(value)
 
-//        오파 서티 자식 뷰도 영향
-//        알파 자기만 영향
+//        opacity   : 자식 뷰도 영향
+//        alpha     : 자기만 영향
     }
 }
