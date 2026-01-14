@@ -16,36 +16,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pL-yj-nMD">
-                                <rect key="frame" x="16" y="415.66666666666669" width="361" height="21"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ewD-10-fv2">
+                                <rect key="frame" x="32" y="134" width="329" height="329"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="329" id="K7T-mv-WYv"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzz-Jc-B5d">
+                                <rect key="frame" x="121" y="710" width="151" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="다른 도시 찾아보기"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxu-Ks-x1I">
+                                <rect key="frame" x="32" y="532" width="329" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzz-Jc-B5d">
-                                <rect key="frame" x="121.33333333333333" y="710" width="150.33333333333337" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="다른 도시 찾아보기"/>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pL-yj-nMD">
+                                <rect key="frame" x="32" y="479" width="329" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="bzz-Jc-B5d" secondAttribute="bottom" constant="39" id="GtZ-eT-lrc"/>
-                            <constraint firstItem="9pL-yj-nMD" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="cyx-nO-F3P"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9pL-yj-nMD" secondAttribute="trailing" constant="16" id="hfo-Q6-6ai"/>
-                            <constraint firstItem="9pL-yj-nMD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="mC0-Wk-A8S"/>
-                            <constraint firstItem="bzz-Jc-B5d" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="oFj-u6-qtM"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bxu-Ks-x1I" secondAttribute="trailing" constant="32" id="1sR-5U-MAL"/>
+                            <constraint firstItem="9pL-yj-nMD" firstAttribute="top" secondItem="ewD-10-fv2" secondAttribute="bottom" constant="16" id="59o-Bq-4l9"/>
+                            <constraint firstItem="9pL-yj-nMD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="JwZ-yj-CUG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ewD-10-fv2" secondAttribute="trailing" constant="32" id="Rk4-3S-hZN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="bzz-Jc-B5d" secondAttribute="bottom" constant="39" id="YlQ-yV-zGa"/>
+                            <constraint firstItem="bzz-Jc-B5d" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="121" id="aEK-vM-MDn"/>
+                            <constraint firstItem="bxu-Ks-x1I" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="hH4-zt-k25"/>
+                            <constraint firstItem="bxu-Ks-x1I" firstAttribute="top" secondItem="9pL-yj-nMD" secondAttribute="bottom" constant="32" id="hMn-Hb-jOD"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9pL-yj-nMD" secondAttribute="trailing" constant="32" id="iSj-4y-7Uk"/>
+                            <constraint firstItem="ewD-10-fv2" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="sKo-kx-LR8"/>
+                            <constraint firstItem="ewD-10-fv2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="xIA-9p-KFW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="anotherButton" destination="bzz-Jc-B5d" id="LNw-q4-npf"/>
+                        <outlet property="cityDescriptionLabel" destination="bxu-Ks-x1I" id="dnK-8H-yLl"/>
+                        <outlet property="cityImageView" destination="ewD-10-fv2" id="2PL-wb-xT3"/>
                         <outlet property="cityNameLabel" destination="9pL-yj-nMD" id="hXB-lu-JIb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139.69465648854961" y="91.549295774647888"/>
+            <point key="canvasLocation" x="280" y="92"/>
         </scene>
         <!--Oversea View Controller-->
         <scene sceneID="CNE-df-hT0">

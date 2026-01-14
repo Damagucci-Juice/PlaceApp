@@ -89,6 +89,7 @@ private extension PlaceViewController {
         let height = width * 1.6
         layout.itemSize = CGSize(width: width, height: height)
         cityCollectionView.collectionViewLayout = layout
+        cityCollectionView.backgroundColor = .clear
     }
 
     func fetchFirstSceneImage() {
