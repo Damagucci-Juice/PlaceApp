@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 final class PlaceViewController: UIViewController {
 
     @IBOutlet var headerSeparator: UIView!
@@ -20,6 +22,8 @@ final class PlaceViewController: UIViewController {
         return result
     }()
 
+    private var time: Float = 0.0
+    private var timer: Timer?
     private lazy var progressView: UIProgressView = {
         let view = UIProgressView()
         view.trackTintColor = .lightGray
@@ -28,8 +32,6 @@ final class PlaceViewController: UIViewController {
         return view
     }()
 
-    private var time: Float = 0.0
-    private var timer: Timer?
 
 
     private var region: Region = .all {
@@ -49,15 +51,7 @@ final class PlaceViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         setupAttributes()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            guard let self else { return }
-            self.didTapDownloadButton()
-        }
+        fetchFirstSceneImage()
     }
 
     private func setupLayout() {
@@ -93,10 +87,19 @@ final class PlaceViewController: UIViewController {
 }
 
 private extension PlaceViewController {
-    @objc private func didTapDownloadButton() {
+
+    func fetchFirstSceneImage() {
+        let urls = CityInfo.city[0..<20].compactMap { URL(string: $0.image) }
+        let prefetcher = ImagePrefetcher(urls: urls) { [weak self] _, _, _ in
+            self?.handlePrefetchComplete()
+        }
+        prefetcher.start()
+    }
+
+    func handlePrefetchComplete() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(
-            timeInterval: 0.05,
+            timeInterval: 0.03,
             target: self,
             selector: #selector(setProgress),
             userInfo: nil,
@@ -104,11 +107,13 @@ private extension PlaceViewController {
         )
     }
 
-    @objc private func setProgress() {
+    /// 로딩뷰 숨김 및 타이머 해제
+    /// 프로그래스바 진도율 업데이트
+    @objc func setProgress() {
         time += 0.05
-        progressView.setProgress(time, animated: true)
+        progressView.setProgress(time, animated: false)
+
         if time >= 1.0 {
-            // 완료 액션
             self.loadingView.isHidden = true
             timer?.invalidate()
         }
