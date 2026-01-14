@@ -141,10 +141,27 @@ extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSou
             name: "City",
             bundle: nil
         )
-        let vc = sb.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
 
-        vc.setupInfo(CityInfo.city[indexPath.item])
-        navigationController?.pushViewController(vc, animated: true)
+        let city = CityInfo.city[indexPath.item]
+
+        if city.isDomestic {
+            let vc = sb.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+
+
+            vc.setupInfo(city)
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            // overseas
+
+            let vc = sb.instantiateViewController(withIdentifier: OverseaViewController.identifier) as! OverseaViewController
+
+            vc.setContent(city)
+
+            let newNaviController = UINavigationController(rootViewController: vc)
+
+            present(newNaviController, animated: true)
+        }
+
     }
 
 }
