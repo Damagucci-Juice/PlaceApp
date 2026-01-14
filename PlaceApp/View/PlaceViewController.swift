@@ -29,15 +29,20 @@ final class PlaceViewController: UIViewController {
         return view
     }()
 
-    private var regionaryDataSource: [City] {
-        CityInfo.city
-    }
+    private lazy var headerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
+
+    private var regionaryDataSource: [City] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         setupAttributes()
         fetchFirstSceneImage()
+        regionaryDataSource = CityInfo.city
     }
 
     private func setupLayout() {
@@ -77,15 +82,17 @@ private extension PlaceViewController {
         let xib = UINib(nibName: CityCollectionViewCell.identifier, bundle: nil)
 
         cityCollectionView.register(xib, forCellWithReuseIdentifier: CityCollectionViewCell.identifier)
+        cityCollectionView.register(CustomCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CustomCollectionHeaderView.identifier)
+
         cityCollectionView.delegate = self
         cityCollectionView.dataSource = self
 
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
-        let width = 200.0
+        let width = 150.0
         let height = width * 1.6
         layout.itemSize = CGSize(width: width, height: height)
         cityCollectionView.collectionViewLayout = layout
@@ -123,18 +130,31 @@ private extension PlaceViewController {
         }
     }
 
-
+    @objc func segementedValueChange(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            // 전체
+            regionaryDataSource = CityInfo.city
+        case 1:
+            // 국내
+            regionaryDataSource = CityInfo.domesticCities
+        default:
+            // 해외
+            regionaryDataSource = CityInfo.internationalCities
+        }
+        cityCollectionView.reloadData()
+    }
 }
 
-extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        CityInfo.city.count
+        regionaryDataSource.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCollectionViewCell.identifier, for: indexPath) as? CityCollectionViewCell else { return UICollectionViewCell() }
 
-        cell.configure(CityInfo.city[indexPath.item])
+        cell.configure(regionaryDataSource[indexPath.item])
 
         return cell
     }
@@ -145,7 +165,7 @@ extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSou
             bundle: nil
         )
 
-        let city = CityInfo.city[indexPath.item]
+        let city = regionaryDataSource[indexPath.item]
 
         if city.isDomestic {
             // domestic -> push
@@ -170,4 +190,25 @@ extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSou
 
     }
 
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let header =  collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CustomCollectionHeaderView.identifier, for: indexPath) as? CustomCollectionHeaderView else {
+                return CustomCollectionHeaderView()
+            }
+
+            header.configure()
+            header.segmentedControl.addTarget(self, action: #selector(segementedValueChange), for: .valueChanged)
+            return header
+        }
+
+        return UICollectionReusableView()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.size.width, height: 40)
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
 }
