@@ -10,16 +10,16 @@ import UIKit
 extension UILabel {
     func likeTitle() {
         font = .boldSystemFont(ofSize: 22)
-        textColor = .white
-        textAlignment = .right
+        textColor = .label
+        textAlignment = .center
         numberOfLines = 1
         backgroundColor = .clear
     }
 
     func likeSecondary() {
         font = .systemFont(ofSize: 16)
-        textColor = .white
-        textAlignment = .left
+        textColor = .secondaryLabel
+        textAlignment = .center
         numberOfLines = 1
         backgroundColor = .clear
     }
