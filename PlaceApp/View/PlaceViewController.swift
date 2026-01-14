@@ -135,6 +135,16 @@ extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSou
 
         return cell
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(
+            name: "City",
+            bundle: nil
+        )
+        let vc = sb.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+
+        vc.setupInfo(CityInfo.city[indexPath.item])
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 }
