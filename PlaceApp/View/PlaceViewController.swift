@@ -83,17 +83,19 @@ private extension PlaceViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 100, height: 100)
+
+        let width = 200.0
+        let height = width * 1.6
+        layout.itemSize = CGSize(width: width, height: height)
         cityCollectionView.collectionViewLayout = layout
     }
 
     func fetchFirstSceneImage() {
         let urls = CityInfo.city[0..<20].compactMap { URL(string: $0.image) }
-        let prefetcher = ImagePrefetcher(urls: urls) { [weak self] _, _, _ in
+        let prefetcher = ImagePrefetcher(urls: urls, completionHandler:  { [weak self] _, _, _ in
             self?.handlePrefetchComplete()
-        }
+        })
         prefetcher.start()
     }
 
@@ -145,14 +147,14 @@ extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let city = CityInfo.city[indexPath.item]
 
         if city.isDomestic {
-            let vc = sb.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            // domestic -> push
+            let vc = sb.instantiateViewController(withIdentifier: DetailViewController.identifier) as! DetailViewController
 
 
             vc.setupInfo(city)
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            // overseas
-
+            // overseas -> Present
             let vc = sb.instantiateViewController(withIdentifier: OverseaViewController.identifier) as! OverseaViewController
 
             vc.setContent(city)
