@@ -160,7 +160,10 @@ extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSou
 
             vc.setContent(city)
 
+
             let newNaviController = UINavigationController(rootViewController: vc)
+
+            newNaviController.modalPresentationStyle = .fullScreen
 
             present(newNaviController, animated: true)
         }

@@ -17,7 +17,7 @@ class OverseaViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,5 +34,17 @@ class OverseaViewController: UIViewController {
     func fillInfo() {
         guard let content else { return }
         titleLabel.text = "해외 명소: \(content.title)"
+    }
+
+    func setupLayout() {
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
+    }
+
+    @objc
+    func rightBarButtonTapped() {
+        print(#function)
+
+        dismiss(animated: true)
     }
 }
