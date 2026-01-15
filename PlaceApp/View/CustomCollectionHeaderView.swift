@@ -21,9 +21,11 @@ class CustomCollectionHeaderView: UICollectionReusableView {
     func configure() {
         backgroundColor = .clear
         addSubview(segmentedControl)
+        segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: lastSegmentKey)
 
         segmentedControl.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.verticalEdges.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(16)
         }
     }
     

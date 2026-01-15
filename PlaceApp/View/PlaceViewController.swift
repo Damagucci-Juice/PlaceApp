@@ -9,6 +9,8 @@ import UIKit
 
 import Kingfisher
 
+let lastSegmentKey = "LastSegment"
+
 final class PlaceViewController: UIViewController {
 
     private lazy var loadingView: UIView = {
@@ -55,12 +57,6 @@ final class PlaceViewController: UIViewController {
         return view
     }()
 
-    private lazy var headerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .green
-        return view
-    }()
-
     private var regionaryDataSource: [City] = []
 
     override func viewDidLoad() {
@@ -81,6 +77,14 @@ final class PlaceViewController: UIViewController {
     }
 
     private func setupUI() {
+        // MARK: - Navi Bar Item
+        let profileButton = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(profileBarButtonTapped))
+        navigationItem.rightBarButtonItem = profileButton
+
+        let hotPlaceButton = UIBarButtonItem(image: UIImage(systemName: "flame.fill")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(hotplaceBarButtonTapped))
+        navigationItem.leftBarButtonItem = hotPlaceButton
+
+        // MARK: Views
         view.addSubview(loadingView)
 
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,17 +105,25 @@ final class PlaceViewController: UIViewController {
             progressView.leadingAnchor.constraint(equalTo: loadingView.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: loadingView.trailingAnchor)
         ])
-
-        let profileButton = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(profileBarButtonTapped))
-        navigationItem.rightBarButtonItem = profileButton
     }
 
     private func setupAttributes() {
         setCityColleciontView()
+        loadLastSegInfo()
+    }
+
+    private func loadLastSegInfo() {
+        let lastIndex = UserDefaults.standard.integer(forKey: lastSegmentKey)
+        setCityBy(segIndex: lastIndex)
     }
 
     @objc private func profileBarButtonTapped() {
         navigationController?.pushViewController(ProfileViewController(), animated: false)
+    }
+
+    @objc private func hotplaceBarButtonTapped() {
+        print(#function)
+//        navigationController?.pushViewController(ProfileViewController(), animated: false)
     }
 
     private func setNaviTitle() {
@@ -173,7 +185,13 @@ private extension PlaceViewController {
     }
 
     @objc func segementedValueChange(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
+        UserDefaults.standard.set(sender.selectedSegmentIndex, forKey: lastSegmentKey)
+
+        setCityBy(segIndex: sender.selectedSegmentIndex)
+    }
+
+    private func setCityBy(segIndex: Int) {
+        switch segIndex {
         case 0:
             // 전체
             regionaryDataSource = CityInfo.city
@@ -184,6 +202,7 @@ private extension PlaceViewController {
             // 해외
             regionaryDataSource = CityInfo.internationalCities
         }
+
         cityCollectionView.reloadData()
     }
 }
