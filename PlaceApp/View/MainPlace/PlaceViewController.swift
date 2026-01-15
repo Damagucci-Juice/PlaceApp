@@ -63,7 +63,7 @@ final class PlaceViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchFirstSceneImage()
-        regionaryDataSource = CityInfo.city
+        regionaryDataSource = CityInfo.city.shuffled()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -192,13 +192,13 @@ private extension PlaceViewController {
         switch segIndex {
         case 0:
             // 전체
-            regionaryDataSource = CityInfo.city
+            regionaryDataSource = CityInfo.city.shuffled()
         case 1:
             // 국내
-            regionaryDataSource = CityInfo.domesticCities
+            regionaryDataSource = CityInfo.domesticCities.shuffled()
         default:
             // 해외
-            regionaryDataSource = CityInfo.internationalCities
+            regionaryDataSource = CityInfo.internationalCities.shuffled()
         }
 
         cityCollectionView.reloadData()
