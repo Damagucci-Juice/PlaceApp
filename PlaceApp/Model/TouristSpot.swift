@@ -23,7 +23,7 @@ struct TouristSpot {
 }
 
 struct TouristSpotInfo {
-    let spots: [TouristSpot] = [
+    static let spots: [TouristSpot] = [
         // MARK: - 서울 (10개)
         TouristSpot(
             id: 1,

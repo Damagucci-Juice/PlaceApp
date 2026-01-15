@@ -122,8 +122,7 @@ final class PlaceViewController: UIViewController {
     }
 
     @objc private func hotplaceBarButtonTapped() {
-        print(#function)
-//        navigationController?.pushViewController(ProfileViewController(), animated: false)
+        navigationController?.pushViewController(HotplaceViewController(), animated: false)
     }
 
     private func setNaviTitle() {
@@ -133,7 +132,6 @@ final class PlaceViewController: UIViewController {
         } else {
             navigationItem.title = "인기도시"
         }
-
     }
 }
 
