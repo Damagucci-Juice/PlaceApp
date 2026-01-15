@@ -38,7 +38,7 @@ final class PlaceViewController: UIViewController {
         let cellWidth = (deviceWidth - insetVal1 - spacingVal1) / itemCountPerRow
 
         let collectionViewHeight = cityCollectionView.bounds.height
-        let itemCountPerCol: CGFloat = 2
+        let itemCountPerCol: CGFloat = 3
         let insetVal2 = inset * 2
         let spacingVal2 = spacing * (itemCountPerCol - 1)
         let cellHeight = (collectionViewHeight - insetVal2 - spacingVal2) / itemCountPerCol

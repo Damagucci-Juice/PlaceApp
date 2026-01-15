@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE5BBDF92F164FF100A823FE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BE5BBDF82F164FF100A823FE /* Kingfisher */; };
+		BEA85C1D2F18DC8D00DB97B6 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = BEA85C1C2F18DC8D00DB97B6 /* Toast */; };
 		BEF189A22F179B03002AEDC1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BEF189A12F179B03002AEDC1 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEA85C1D2F18DC8D00DB97B6 /* Toast in Frameworks */,
 				BE5BBDF92F164FF100A823FE /* Kingfisher in Frameworks */,
 				BEF189A22F179B03002AEDC1 /* SnapKit in Frameworks */,
 			);
@@ -87,6 +89,7 @@
 			packageProductDependencies = (
 				BE5BBDF82F164FF100A823FE /* Kingfisher */,
 				BEF189A12F179B03002AEDC1 /* SnapKit */,
+				BEA85C1C2F18DC8D00DB97B6 /* Toast */,
 			);
 			productName = PlaceApp;
 			productReference = BE5BBDD02F16220100A823FE /* PlaceApp.app */;
@@ -119,6 +122,7 @@
 			packageReferences = (
 				BE5BBDF72F164FF100A823FE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				BEF189A02F179B03002AEDC1 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				BEA85C1B2F18DC8D00DB97B6 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BE5BBDD12F16220100A823FE /* Products */;
@@ -376,6 +380,14 @@
 				minimumVersion = 8.6.2;
 			};
 		};
+		BEA85C1B2F18DC8D00DB97B6 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		BEF189A02F179B03002AEDC1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -391,6 +403,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BE5BBDF72F164FF100A823FE /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		BEA85C1C2F18DC8D00DB97B6 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEA85C1B2F18DC8D00DB97B6 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		BEF189A12F179B03002AEDC1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 import SnapKit
+import Toast
 
 let nicknameKey = "Nickname"
 
@@ -41,6 +43,10 @@ class ProfileViewController: UIViewController {
 
         navigationItem.title = "프로필 설정"
         nicknameTextField.addTarget(self, action: #selector(textFieldDidReture), for: .editingDidEndOnExit)
+
+        let doneButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(rightBarButtonItemTapped))
+
+        navigationItem.rightBarButtonItem = doneButton
     }
 
     @objc
@@ -48,5 +54,11 @@ class ProfileViewController: UIViewController {
         guard let text = sender.text, !text.isEmpty else { return }
 
         UserDefaults.standard.set(text, forKey: nicknameKey)
+        view.makeToast("닉네임 설정이 완료되었습니다.")
+    }
+
+    @objc
+    func rightBarButtonItemTapped() {
+        textFieldDidReture(nicknameTextField)
     }
 }
