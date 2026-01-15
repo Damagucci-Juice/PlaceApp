@@ -55,11 +55,17 @@ final class HotplaceViewController: UIViewController {
             forCellWithReuseIdentifier: HotplaceCollectionViewCell.identifier
         )
 
+        let adXib = UINib(nibName: HotplaceADCollectionViewCell.identifier, bundle: nil)
+        collectionView.register(
+            adXib,
+            forCellWithReuseIdentifier: HotplaceADCollectionViewCell.identifier
+        )
+
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let deviceWidth = self.view.window!.windowScene!.screen.bounds.width
-        let spacing: CGFloat = 2.0
-        let inset: CGFloat = 2.0
+        let spacing: CGFloat = 4.0
+        let inset: CGFloat = 4.0
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
@@ -88,12 +94,22 @@ extension HotplaceViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotplaceCollectionViewCell.identifier, for: indexPath)
-                as? HotplaceCollectionViewCell else { return UICollectionViewCell() }
+        let item = TouristSpotInfo.spots[indexPath.item]
+        if item.ad {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotplaceADCollectionViewCell.identifier, for: indexPath) as? HotplaceADCollectionViewCell else { return UICollectionViewCell() }
 
-        cell.configure(TouristSpotInfo.spots[indexPath.item])
+            cell.configure(item: item)
 
-        return cell
+            return cell
+
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotplaceCollectionViewCell.identifier, for: indexPath)
+                    as? HotplaceCollectionViewCell else { return UICollectionViewCell() }
+
+            cell.configure(item)
+
+            return cell
+        }
     }
 
 }
