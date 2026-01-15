@@ -19,6 +19,32 @@ final class PlaceViewController: UIViewController {
 
     @IBOutlet var cityCollectionView: UICollectionView!
 
+    private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let deviceWidth = self.view.window!.windowScene!.screen.bounds.width
+        let spacing: CGFloat = 20.0
+        let inset: CGFloat = 20.0
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+
+        // cal width, height by screen size
+        let itemCountPerRow: CGFloat = 2
+        let insetVal1 = inset * 2
+        let spacingVal1 = spacing * (itemCountPerRow - 1)
+        let cellWidth = (deviceWidth - insetVal1 - spacingVal1) / itemCountPerRow
+
+        let collectionViewHeight = cityCollectionView.bounds.height
+        let itemCountPerCol: CGFloat = 2
+        let insetVal2 = inset * 2
+        let spacingVal2 = spacing * (itemCountPerCol - 1)
+        let cellHeight = (collectionViewHeight - insetVal2 - spacingVal2) / itemCountPerCol
+
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        return layout
+    }()
+
     private var time: Float = 0.0
     private var timer: Timer?
     private lazy var progressView: UIProgressView = {
@@ -39,13 +65,22 @@ final class PlaceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
-        setupAttributes()
+        setupUI()
         fetchFirstSceneImage()
         regionaryDataSource = CityInfo.city
     }
 
-    private func setupLayout() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNaviTitle()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupAttributes()
+    }
+
+    private func setupUI() {
         view.addSubview(loadingView)
 
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -66,11 +101,27 @@ final class PlaceViewController: UIViewController {
             progressView.leadingAnchor.constraint(equalTo: loadingView.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: loadingView.trailingAnchor)
         ])
+
+        let profileButton = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(profileBarButtonTapped))
+        navigationItem.rightBarButtonItem = profileButton
     }
 
     private func setupAttributes() {
-        navigationItem.title = "인기 도시"
         setCityColleciontView()
+    }
+
+    @objc private func profileBarButtonTapped() {
+        navigationController?.pushViewController(ProfileViewController(), animated: false)
+    }
+
+    private func setNaviTitle() {
+        let userNickname = UserDefaults.standard.string(forKey: nicknameKey)
+        if let userNickname {
+            navigationItem.title = "\(userNickname)님 환영합니다."
+        } else {
+            navigationItem.title = "인기도시"
+        }
+
     }
 }
 
@@ -86,16 +137,7 @@ private extension PlaceViewController {
 
         cityCollectionView.delegate = self
         cityCollectionView.dataSource = self
-
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
-        let width = 150.0
-        let height = width * 1.6
-        layout.itemSize = CGSize(width: width, height: height)
-        cityCollectionView.collectionViewLayout = layout
+        cityCollectionView.collectionViewLayout = collectionViewLayout
         cityCollectionView.backgroundColor = .clear
     }
 

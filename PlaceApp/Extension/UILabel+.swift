@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
     func likeTitle() {
-        font = .boldSystemFont(ofSize: 22)
+        font = .boldSystemFont(ofSize: 18)
         textColor = .black
         textAlignment = .center
         numberOfLines = 1
