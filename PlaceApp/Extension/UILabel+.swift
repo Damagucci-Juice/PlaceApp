@@ -24,6 +24,22 @@ extension UILabel {
         backgroundColor = .clear
     }
 
+    func likeBody() {
+        font = .systemFont(ofSize: 13)
+        textColor = .black
+        textAlignment = .center
+        numberOfLines = 0
+        backgroundColor = .clear
+    }
+
+    func likeSubheader() {
+        font = .systemFont(ofSize: 13)
+        textColor = .secondaryLabel
+        textAlignment = .left
+        numberOfLines = 2
+        backgroundColor = .clear
+    }
+
     func setAttributedText(_ fullText: String, _ keyword: String? = nil) {
         guard let keyword else {
             text = fullText

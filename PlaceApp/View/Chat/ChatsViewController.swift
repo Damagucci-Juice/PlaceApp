@@ -48,11 +48,11 @@ extension ChatsViewController: TableBasicProtocol {
     func setupTable() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 100.0
+        tableView.separatorStyle = .none
 
         let singleXib = UINib(nibName: PersonalChatRoomTableViewCell.identifier, bundle: nil)
         tableView.register(singleXib, forCellReuseIdentifier: PersonalChatRoomTableViewCell.identifier)
-
-        // TODO: - Group Chat Register
     }
 }
 
