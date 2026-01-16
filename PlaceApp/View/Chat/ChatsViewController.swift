@@ -32,9 +32,9 @@ extension ChatsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SingleChatRoomTableViewCell.identifier, for: indexPath) as? SingleChatRoomTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PersonalChatRoomTableViewCell.identifier, for: indexPath) as? PersonalChatRoomTableViewCell else { return UITableViewCell() }
 
-        cell.textLabel?.text = "\(mockChatRooms[indexPath.row].chatRoomId)번방"
+        cell.configure(mockChatRooms[indexPath.row])
 
         cell.selectionStyle = .none
 
@@ -49,8 +49,8 @@ extension ChatsViewController: TableBasicProtocol {
         tableView.delegate = self
         tableView.dataSource = self
 
-        let singleXib = UINib(nibName: SingleChatRoomTableViewCell.identifier, bundle: nil)
-        tableView.register(singleXib, forCellReuseIdentifier: SingleChatRoomTableViewCell.identifier)
+        let singleXib = UINib(nibName: PersonalChatRoomTableViewCell.identifier, bundle: nil)
+        tableView.register(singleXib, forCellReuseIdentifier: PersonalChatRoomTableViewCell.identifier)
 
         // TODO: - Group Chat Register
     }

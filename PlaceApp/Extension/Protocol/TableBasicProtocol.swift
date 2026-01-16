@@ -9,3 +9,8 @@ import Foundation
 protocol TableBasicProtocol: AnyObject {
     func setupTable()
 }
+
+protocol CellBasicProtocol: AnyObject {
+    associatedtype Item
+    func configure(_ item: Item)
+}

@@ -13,10 +13,11 @@ extension UIViewController {
     }
 }
 
-protocol Drawable {
+@objc
+protocol Drawable: AnyObject {
     func setupUI()
     func setupAttribute()
-    func setupNaviItem()
+    @objc optional func setupNaviItem()
 }
 
 protocol Bindable {
