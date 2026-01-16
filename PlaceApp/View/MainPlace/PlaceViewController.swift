@@ -147,6 +147,7 @@ private extension PlaceViewController {
 
         cityCollectionView.delegate = self
         cityCollectionView.dataSource = self
+        cityCollectionView.prefetchDataSource = self
         cityCollectionView.collectionViewLayout = collectionViewLayout
         cityCollectionView.backgroundColor = .clear
     }
@@ -271,3 +272,13 @@ extension PlaceViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return 1
     }
 }
+
+// MARK: - Prefetching Images
+
+extension PlaceViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let urls = indexPaths.map { $0.item }.map { regionaryDataSource[$0].image }.compactMap { URL(string: $0) }
+        ImagePrefetcher(urls: urls).start()
+    }
+}
+
