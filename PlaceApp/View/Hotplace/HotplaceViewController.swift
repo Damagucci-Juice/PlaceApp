@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class HotplaceViewController: UIViewController {
+final class HotplaceViewController: UIViewController, Reusable {
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

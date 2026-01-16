@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class HotplaceCollectionViewCell: UICollectionViewCell {
-
-    static let identifier = "HotplaceCollectionViewCell"
+final class HotplaceCollectionViewCell: UICollectionViewCell, Reusable {
 
     @IBOutlet var linkImageView: UIImageView!
 

@@ -7,9 +7,7 @@
 
 import UIKit
 
-class HotplaceADCollectionViewCell: UICollectionViewCell {
-
-    static let identifier =  "HotplaceADCollectionViewCell"
+class HotplaceADCollectionViewCell: UICollectionViewCell, Reusable {
 
     @IBOutlet var capsuleView: UIView!
     @IBOutlet var titleLabel: UILabel!

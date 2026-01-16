@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ChatsViewController: UIViewController {
+final class ChatsViewController: UIViewController, Reusable {
 
     @IBOutlet var tableView: UITableView!
 
@@ -32,10 +32,10 @@ extension ChatsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SingleChatRoomTableViewCell.identifier, for: indexPath) as? SingleChatRoomTableViewCell else { return UITableViewCell() }
+
         cell.textLabel?.text = "\(mockChatRooms[indexPath.row].chatRoomId)번방"
 
-        cell.backgroundColor = .brown
         cell.selectionStyle = .none
 
         return cell
@@ -48,12 +48,17 @@ extension ChatsViewController: TableBasicProtocol {
     func setupTable() {
         tableView.delegate = self
         tableView.dataSource = self
+
+        let singleXib = UINib(nibName: SingleChatRoomTableViewCell.identifier, bundle: nil)
+        tableView.register(singleXib, forCellReuseIdentifier: SingleChatRoomTableViewCell.identifier)
+
+        // TODO: - Group Chat Register
     }
 }
 
 extension ChatsViewController: Drawable {
-    func setupUI() {
-    }
+    // storyboard constraints
+    func setupUI() { }
 
     func setupAttribute() {
         setupTable()
