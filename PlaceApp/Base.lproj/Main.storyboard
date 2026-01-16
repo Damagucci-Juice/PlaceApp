@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NFy-CW-eHX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MJT-dV-BXm">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
@@ -54,12 +54,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1066.4122137404579" y="130.98591549295776"/>
+            <point key="canvasLocation" x="1993.1297709923663" y="130.98591549295776"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--관광지-->
         <scene sceneID="9NS-d2-vbM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NFy-CW-eHX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="관광지" image="flag" catalog="system" id="q7q-mE-lEG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="N1e-Q0-GOE">
                         <rect key="frame" x="0.0" y="118" width="393" height="54"/>
@@ -72,12 +73,85 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F83-TC-zm7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139.69465648854961" y="130.98591549295776"/>
+            <point key="canvasLocation" x="1066.4122137404579" y="130.98591549295776"/>
+        </scene>
+        <!--TRAVEL TALK-->
+        <scene sceneID="y7G-t0-hAa">
+            <objects>
+                <viewController storyboardIdentifier="ChatsViewController" id="NiH-fN-R0A" customClass="ChatsViewController" customModule="PlaceApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="soa-qa-Zd6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eOe-5c-erW">
+                                <rect key="frame" x="0.0" y="172" width="393" height="563"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="02J-aG-lrQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="02J-aG-lrQ" firstAttribute="trailing" secondItem="eOe-5c-erW" secondAttribute="trailing" id="I67-ku-LFa"/>
+                            <constraint firstItem="eOe-5c-erW" firstAttribute="leading" secondItem="02J-aG-lrQ" secondAttribute="leading" id="dFe-A0-DPD"/>
+                            <constraint firstItem="eOe-5c-erW" firstAttribute="top" secondItem="02J-aG-lrQ" secondAttribute="top" id="kzF-9C-gJV"/>
+                            <constraint firstItem="02J-aG-lrQ" firstAttribute="bottom" secondItem="eOe-5c-erW" secondAttribute="bottom" id="toD-vj-BPK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="TRAVEL TALK" id="dp4-ds-Vai"/>
+                    <connections>
+                        <outlet property="tableView" destination="eOe-5c-erW" id="0Mo-Tv-eBA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3gv-IN-fNW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1991.6030534351144" y="855.63380281690149"/>
+        </scene>
+        <!--채팅-->
+        <scene sceneID="sNU-S3-hMu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m3C-yr-1m4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="채팅" image="rectangle.and.pencil.and.ellipsis" catalog="system" id="l9n-aM-CvI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hqy-lu-RR2">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="NiH-fN-R0A" kind="relationship" relationship="rootViewController" id="5cC-I1-PPD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9SN-1t-3M4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1066.4122137404579" y="855.63380281690149"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="FM3-W4-gCk">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="MJT-dV-BXm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h0j-1v-aqB">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="NFy-CW-eHX" kind="relationship" relationship="viewControllers" id="Htp-GL-aje"/>
+                        <segue destination="m3C-yr-1m4" kind="relationship" relationship="viewControllers" id="lT5-rp-LPb"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z9o-pY-KGi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139.69465648854961" y="492.95774647887328"/>
         </scene>
     </scenes>
     <resources>
+        <image name="flag" catalog="system" width="128" height="121"/>
+        <image name="rectangle.and.pencil.and.ellipsis" catalog="system" width="128" height="87"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

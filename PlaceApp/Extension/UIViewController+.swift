@@ -12,3 +12,17 @@ extension UIViewController {
         view.backgroundColor = .white
     }
 }
+
+protocol Drawable {
+    func setupUI()
+    func setupAttribute()
+    func setupNaviItem()
+}
+
+protocol Bindable {
+    associatedtype VM = ViewModelProtocol
+
+    func setupBinding(_ vm: VM)
+}
+
+protocol ViewModelProtocol { }
