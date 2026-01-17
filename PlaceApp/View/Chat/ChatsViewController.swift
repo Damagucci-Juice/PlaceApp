@@ -63,6 +63,7 @@ extension ChatsViewController: TableBasicProtocol {
 
         let singleXib = UINib(nibName: PersonalChatRoomTableViewCell.identifier, bundle: nil)
         tableView.register(singleXib, forCellReuseIdentifier: PersonalChatRoomTableViewCell.identifier)
+        tableView.backgroundColor = .white
     }
 }
 

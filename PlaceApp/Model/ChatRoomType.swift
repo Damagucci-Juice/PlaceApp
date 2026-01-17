@@ -62,7 +62,7 @@ let mockChatRooms: [ChatRoom] = [
         chatRoomId: 1,
         participantIds: [0, 1],
         messages: [
-            Message(messageId: 101, senderId: 1, content: "오늘 스위프트 공부 어디까지 했어?", timestamp: Date(timeIntervalSince1970: 1705023000)),
+            Message(messageId: 101, senderId: 1, content: "오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?오늘 스위프트 공부 어디까지 했어?", timestamp: Date(timeIntervalSince1970: 1705023000)),
             Message(messageId: 102, senderId: 0, content: "옵셔널 바인딩 배우는 중이야!", timestamp: Date(timeIntervalSince1970: 1705023300)),
             Message(messageId: 103, senderId: 1, content: "guard let은 조기 종료에 좋아", timestamp: Date(timeIntervalSince1970: 1705023480)),
             Message(messageId: 104, senderId: 1, content: "if let shorthand도 많이 쓰더라", timestamp: Date(timeIntervalSince1970: 1705023540)),

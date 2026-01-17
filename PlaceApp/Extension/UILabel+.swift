@@ -12,7 +12,7 @@ extension UILabel {
         font = .boldSystemFont(ofSize: 14)
         textColor = .black
         textAlignment = .center
-        numberOfLines = 1
+        numberOfLines = 0
         backgroundColor = .clear
     }
 
@@ -27,7 +27,7 @@ extension UILabel {
     func likeBody() {
         font = .systemFont(ofSize: 13)
         textColor = .black
-        textAlignment = .center
+        textAlignment = .left
         numberOfLines = 0
         backgroundColor = .clear
     }

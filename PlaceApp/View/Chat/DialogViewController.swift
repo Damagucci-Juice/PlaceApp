@@ -49,11 +49,11 @@ extension DialogViewController: TableBasicProtocol {
         tableView.register(myCellXib, forCellReuseIdentifier: MyChatTableViewCell.identifier)
         tableView.register(ohtersCellXib, forCellReuseIdentifier: OthersChatTableViewCell.identifier)
 
-        tableView.rowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
 
-        tableView.backgroundColor = .orange
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
     }
-    
 
 }
 
@@ -85,7 +85,7 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
             else { return UITableViewCell() }
 
             // configure
-
+            myChatCell.configure(messages[indexPath.item])
             cell = myChatCell
         } else {
             // 상대방
@@ -93,10 +93,16 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
             guard let othersChatCell = tableView.dequeueReusableCell(withIdentifier: OthersChatTableViewCell.identifier, for: indexPath) as? OthersChatTableViewCell
             else { return UITableViewCell() }
             // configure
-
+            othersChatCell.configure(messages[indexPath.item])
             cell = othersChatCell
         }
 
+        cell.selectionStyle = .none
+
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(#function, indexPath)
     }
 }
