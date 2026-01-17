@@ -23,6 +23,16 @@ final class ChatsViewController: UIViewController, Reusable {
 extension ChatsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(#function, indexPath)
+
+        // 1. 어떤 스토리보드 파일
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        // 2. 어떤 뷰 컨트롤러
+        let vc = sb.instantiateViewController(withIdentifier: DialogViewController.identifier) as! DialogViewController
+
+        vc.chatroom = mockChatRooms[indexPath.row]
+
+        // 3. 어떤 방식으로 띄워줘
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

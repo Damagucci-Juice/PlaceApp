@@ -111,6 +111,36 @@
             </objects>
             <point key="canvasLocation" x="1991.6030534351144" y="855.63380281690149"/>
         </scene>
+        <!--Dialog View Controller-->
+        <scene sceneID="7au-oW-Nqy">
+            <objects>
+                <viewController storyboardIdentifier="DialogViewController" id="DRZ-Ds-rNO" customClass="DialogViewController" customModule="PlaceApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zKr-GO-VnG">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dad-Uy-3BV">
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XcS-JJ-M0c"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dad-Uy-3BV" firstAttribute="leading" secondItem="XcS-JJ-M0c" secondAttribute="leading" id="Eh8-Fm-dSc"/>
+                            <constraint firstItem="XcS-JJ-M0c" firstAttribute="trailing" secondItem="dad-Uy-3BV" secondAttribute="trailing" id="N6c-vL-6bY"/>
+                            <constraint firstItem="dad-Uy-3BV" firstAttribute="top" secondItem="XcS-JJ-M0c" secondAttribute="top" id="gSM-By-48u"/>
+                            <constraint firstItem="XcS-JJ-M0c" firstAttribute="bottom" secondItem="dad-Uy-3BV" secondAttribute="bottom" id="uci-53-FzU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="dad-Uy-3BV" id="VRQ-2W-y38"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Itl-5f-yiC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2976" y="871"/>
+        </scene>
         <!--채팅-->
         <scene sceneID="sNU-S3-hMu">
             <objects>
@@ -158,6 +188,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
