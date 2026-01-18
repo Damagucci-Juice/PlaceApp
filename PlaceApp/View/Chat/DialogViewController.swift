@@ -15,6 +15,35 @@ final class DialogViewController: UIViewController {
 
     var chatroom: ChatRoom!
 
+    private var messages: [[Message]] {
+        var result = [[Message]]()
+        var today = [Message]()
+        for m in chatroom.messages {
+            if today.isEmpty {
+                today.append(m)
+                continue
+            }
+
+            if let last = today.last {
+                let lastStr = last.timestamp.formatted(date: .numeric, time: .omitted)
+                let dateStr = m.timestamp.formatted(date: .numeric, time: .omitted)
+
+                if lastStr == dateStr {
+                    today.append(m)
+                    continue
+                } else {
+                    result.append(today)
+                    today.removeAll()
+                    today.append(m)
+                }
+            }
+        }
+        if !today.isEmpty {
+            result.append(today)
+        }
+        return result
+    }
+
     private lazy var scrollToBottomButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "arrow.down"), for: .normal)
@@ -56,8 +85,12 @@ extension DialogViewController: TableBasicProtocol {
 
         tableView.register(myCellXib, forCellReuseIdentifier: MyChatTableViewCell.identifier)
         tableView.register(ohtersCellXib, forCellReuseIdentifier: OthersChatTableViewCell.identifier)
+        tableView.register(DateHeaderView.self, forHeaderFooterViewReuseIdentifier: DateHeaderView.identifier)
 
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.showsVerticalScrollIndicator = false
+
+        tableView.sectionHeaderTopPadding = 0
 
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
@@ -99,7 +132,7 @@ extension DialogViewController: Drawable {
 
 extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        chatroom?.messages.count ?? 0
+        messages[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -136,5 +169,25 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollToBottomButton.isHidden = scrollView.isBottom
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let message = messages[section].first,
+              let header = tableView.dequeueReusableHeaderFooterView(
+                withIdentifier: DateHeaderView.identifier
+              ) as? DateHeaderView
+        else { return nil }
+
+        header.configure(message.timestamp)
+
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        25
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        messages.count
     }
 }
