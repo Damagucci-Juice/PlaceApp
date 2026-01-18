@@ -7,11 +7,20 @@
 
 import UIKit
 
+import SnapKit
+
 final class DialogViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
     var chatroom: ChatRoom!
+
+    private lazy var scrollToBottomButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+        btn.tintColor = .black
+        return btn
+    }()
 
     var opponent: User {
         chatroom.participantIds
@@ -57,15 +66,34 @@ extension DialogViewController: TableBasicProtocol {
 }
 
 extension DialogViewController: Drawable {
-    func setupUI() { }
+    func setupUI() {
+        view.addSubview(scrollToBottomButton)
+
+        scrollToBottomButton.translatesAutoresizingMaskIntoConstraints = false
+
+        scrollToBottomButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+    }
 
     func setupAttribute() {
         setupTable()
         setupNaviItem()
+        setScrollBottomButton()
     }
     
     func setupNaviItem() {
         navigationItem.title = opponent.userName
+    }
+
+    private func setScrollBottomButton() {
+        scrollToBottomButton.addTarget(self, action: #selector(scrollBottomButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func scrollBottomButtonTapped() {
+        // 인덱스 기반
+        let index = IndexPath(row: chatroom!.messages.count - 1, section: 0)
+        tableView.scrollToRow(at: index, at: .bottom, animated: false)
     }
 }
 
@@ -104,5 +132,9 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.cellForRow(at: indexPath) as? Tappable else { return }
         cell.handleDidTapped()
         tableView.performBatchUpdates(nil, completion: nil)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollToBottomButton.isHidden = scrollView.isBottom
     }
 }
