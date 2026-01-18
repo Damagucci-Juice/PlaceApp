@@ -37,9 +37,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="r5u-Jv-5Sh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Cmx-M9-Wla"/>
-                    <constraint firstAttribute="bottom" secondItem="oSs-ZH-rwd" secondAttribute="bottom" constant="16" id="GdI-dW-t4E"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oSs-ZH-rwd" secondAttribute="bottom" constant="16" id="GdI-dW-t4E"/>
                     <constraint firstItem="oSs-ZH-rwd" firstAttribute="leading" secondItem="r5u-Jv-5Sh" secondAttribute="trailing" constant="8" id="OvL-vX-fIp"/>
-                    <constraint firstItem="oSs-ZH-rwd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Qyc-21-gJk"/>
+                    <constraint firstItem="oSs-ZH-rwd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Qyc-21-gJk"/>
                     <constraint firstItem="r5u-Jv-5Sh" firstAttribute="bottom" secondItem="oSs-ZH-rwd" secondAttribute="bottom" id="aNA-UH-L2q"/>
                     <constraint firstAttribute="trailing" secondItem="oSs-ZH-rwd" secondAttribute="trailing" constant="16" id="rx1-PG-SgZ"/>
                     <constraint firstItem="oSs-ZH-rwd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uDI-aS-d4B"/>

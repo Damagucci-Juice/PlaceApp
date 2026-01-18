@@ -72,3 +72,9 @@ extension OthersChatTableViewCell: Drawable {
         }
     }
 }
+
+extension OthersChatTableViewCell: Tappable {
+    func handleDidTapped() {
+        chatLabel.numberOfLines = chatLabel.numberOfLines == 0 ? 4 : 0
+    }
+}

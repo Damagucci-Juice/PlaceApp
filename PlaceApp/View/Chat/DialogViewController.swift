@@ -11,7 +11,6 @@ final class DialogViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    // MARK: - 필수 데이터니까 ! 써서 없으면 조기 탈락하게 하기
     var chatroom: ChatRoom!
 
     var opponent: User {
@@ -98,11 +97,12 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         cell.selectionStyle = .none
-
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(#function, indexPath)
+        guard let cell = tableView.cellForRow(at: indexPath) as? Tappable else { return }
+        cell.handleDidTapped()
+        tableView.performBatchUpdates(nil, completion: nil)
     }
 }

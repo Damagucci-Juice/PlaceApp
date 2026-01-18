@@ -28,7 +28,7 @@ extension UILabel {
         font = .systemFont(ofSize: 13)
         textColor = .black
         textAlignment = .left
-        numberOfLines = 0
+        numberOfLines = 4
         backgroundColor = .clear
     }
 

@@ -24,7 +24,6 @@ final class MyChatTableViewCell: UITableViewCell {
         chatLabel.text = nil
         timelineLabel.text = nil
     }
-
 }
 
 extension MyChatTableViewCell: Reusable { }
@@ -32,6 +31,7 @@ extension MyChatTableViewCell: Reusable { }
 extension MyChatTableViewCell: CellBasicProtocol {
     func configure(_ item: Message) {
         chatLabel.text = item.content
+
         timelineLabel.text = item
             .timestamp.timeInSouthKorea
     }
@@ -46,8 +46,14 @@ extension MyChatTableViewCell: Drawable {
         chatLabel.setInset(8, 4)
         chatLabel.setCorner(8)
         chatLabel.backgroundColor = .systemGray5
-
         chatLabel.setBorder(.secondaryLabel)
         timelineLabel.likeSecondary()
+    }
+}
+
+
+extension MyChatTableViewCell: Tappable {
+    func handleDidTapped() {
+        chatLabel.numberOfLines = chatLabel.numberOfLines == 0 ? 4 : 0
     }
 }
