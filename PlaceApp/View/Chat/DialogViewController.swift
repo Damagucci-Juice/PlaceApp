@@ -56,7 +56,7 @@ final class DialogViewController: UIViewController {
     }()
 
     private lazy var textView: UITextView = {
-        let result = UITextView()
+        let result = UITextView(frame: .infinite)
         result.setCorner(8)
         result.setBorder(.gray)
         result.backgroundColor = .blue
@@ -64,6 +64,14 @@ final class DialogViewController: UIViewController {
         result.font = .systemFont(ofSize: 16)
         result.textAlignment = .left
         result.isScrollEnabled = false
+        result.isEditable = true
+        return result
+    }()
+
+    private lazy var sendButton: UIButton = {
+        let result = UIButton()
+        result.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        result.tintColor = .tintColor
         return result
     }()
 
@@ -118,7 +126,11 @@ extension DialogViewController: Drawable {
     func setupUI() {
         view.addSubview(tableView)
         view.addSubview(textView)
+        view.addSubview(sendButton)
         view.addSubview(scrollToBottomButton)
+
+        sendButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        sendButton.setContentHuggingPriority(.required, for: .horizontal)
 
         let textViewHeight = 60.0
 
@@ -129,10 +141,18 @@ extension DialogViewController: Drawable {
 
         textView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-64)
+            make.trailing.equalTo(sendButton.snp.leading).offset(-8)
             make.height.lessThanOrEqualTo(textViewHeight)
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-8)
         }
+
+        sendButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(textView.snp.top).offset(4)
+        }
+
+
+        textView.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
         tableView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
@@ -145,6 +165,7 @@ extension DialogViewController: Drawable {
         setTextView()
         setupNaviItem()
         setScrollBottomButton()
+        sendButton.addTarget(self, action: #selector(sendBtnDidTapped), for: .touchUpInside)
     }
     
     func setupNaviItem() {
@@ -165,6 +186,19 @@ extension DialogViewController: Drawable {
         textView.delegate = self
         textView.backgroundColor = .white
     }
+
+    @objc private func sendBtnDidTapped() {
+        chatroom.messages.append(
+            .init(
+                messageId: chatroom.messages.last!.messageId+1,
+                senderId: 0,
+                content: textView.text,
+                timestamp: .now)
+        )
+
+        tableView.reloadData()
+        textView.text.removeAll()
+    }
 }
 
 extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
@@ -173,16 +207,15 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let messages = chatroom?.messages else { return UITableViewCell() }
-
         var cell = UITableViewCell()
         // me
-        if messages[indexPath.row].senderId == 0 {
+        let msg = messages[indexPath.section][indexPath.row]
+        if msg.senderId == 0 {
             guard let myChatCell = tableView.dequeueReusableCell(withIdentifier: MyChatTableViewCell.identifier, for: indexPath) as? MyChatTableViewCell
             else { return UITableViewCell() }
 
             // configure
-            myChatCell.configure(messages[indexPath.item])
+            myChatCell.configure(msg)
             cell = myChatCell
         } else {
             // 상대방
@@ -190,7 +223,7 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
             guard let othersChatCell = tableView.dequeueReusableCell(withIdentifier: OthersChatTableViewCell.identifier, for: indexPath) as? OthersChatTableViewCell
             else { return UITableViewCell() }
             // configure
-            othersChatCell.configure(messages[indexPath.item])
+            othersChatCell.configure(msg)
             cell = othersChatCell
         }
 

@@ -30,7 +30,7 @@ struct Message {
 struct ChatRoom {
     let chatRoomId: Int
     let participantIds: [Int]
-    let messages: [Message]
+    var messages: [Message]
     let chatRoomType: ChatRoomType
 }
 
