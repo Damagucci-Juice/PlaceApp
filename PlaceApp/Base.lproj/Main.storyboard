@@ -87,9 +87,34 @@
                                 <rect key="frame" x="0.0" y="172" width="393" height="563"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="6hG-KL-TRn">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="1"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="62"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F35-ox-GEU">
+                                            <rect key="frame" x="0.0" y="61" width="393" height="1"/>
+                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="ykV-mx-2nC"/>
+                                            </constraints>
+                                        </view>
+                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="상대방 검색" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3R2-nf-gGj">
+                                            <rect key="frame" x="32" y="6" width="329" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="ke6-x1-jCf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="3R2-nf-gGj" secondAttribute="trailing" constant="32" id="2SN-zp-28A"/>
+                                        <constraint firstAttribute="trailing" secondItem="F35-ox-GEU" secondAttribute="trailing" id="AD9-M4-cbS"/>
+                                        <constraint firstItem="3R2-nf-gGj" firstAttribute="leading" secondItem="6hG-KL-TRn" secondAttribute="leading" constant="32" id="T5F-kh-2LB"/>
+                                        <constraint firstItem="F35-ox-GEU" firstAttribute="leading" secondItem="6hG-KL-TRn" secondAttribute="leading" id="ZfS-Oa-3MX"/>
+                                        <constraint firstAttribute="bottom" secondItem="F35-ox-GEU" secondAttribute="bottom" id="k38-d3-JhE"/>
+                                        <constraint firstItem="3R2-nf-gGj" firstAttribute="centerY" secondItem="6hG-KL-TRn" secondAttribute="centerY" id="wIL-kc-Bn4"/>
+                                    </constraints>
                                 </view>
                             </tableView>
                         </subviews>
@@ -104,6 +129,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="TRAVEL TALK" id="dp4-ds-Vai"/>
                     <connections>
+                        <outlet property="searchTextField" destination="3R2-nf-gGj" id="6Hh-hj-Mz3"/>
                         <outlet property="tableView" destination="eOe-5c-erW" id="0Mo-Tv-eBA"/>
                     </connections>
                 </viewController>
