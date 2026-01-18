@@ -33,11 +33,7 @@ extension MyChatTableViewCell: CellBasicProtocol {
     func configure(_ item: Message) {
         chatLabel.text = item.content
         timelineLabel.text = item
-            .timestamp
-            .formatted(
-                date: .omitted,
-                time: .shortened
-            )
+            .timestamp.timeInSouthKorea
     }
 }
 

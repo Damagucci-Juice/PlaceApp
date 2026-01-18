@@ -44,7 +44,7 @@ extension OthersChatTableViewCell: CellBasicProtocol {
 
         nameLabel.text = opponent.userName
         chatLabel.text = item.content
-        timelineLabel.text = item.timestamp.formatted(date: .omitted, time: .shortened)
+        timelineLabel.text = item.timestamp.timeInSouthKorea
     }
 }
 
