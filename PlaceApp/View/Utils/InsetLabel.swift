@@ -34,9 +34,6 @@ final class InsetLabel: UILabel {
         return CGSize(width: width, height: height)
     }
 
-    override var bounds: CGRect {
-        didSet { preferredMaxLayoutWidth = bounds.width - (contentInsets.left + contentInsets.right) }
-    }
 }
 
 extension InsetLabel {
