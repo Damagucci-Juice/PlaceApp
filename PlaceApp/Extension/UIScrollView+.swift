@@ -16,7 +16,7 @@ extension UIScrollView {
 
     var isBottom: Bool {
         let bottomEdge = contentSize.height + contentInset.bottom - bounds.height
-        return contentOffset.y >= bottomEdge - 15
+        return contentOffset.y >= bottomEdge - 30
     }
 
 }

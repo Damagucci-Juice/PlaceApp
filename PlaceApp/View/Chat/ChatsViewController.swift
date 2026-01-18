@@ -31,6 +31,7 @@ extension ChatsViewController: UITableViewDelegate {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: DialogViewController.identifier) as! DialogViewController
         vc.chatroom = datasource[indexPath.row]
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -11,7 +11,11 @@ import SnapKit
 
 final class DialogViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
+
+    private lazy var tableView: UITableView = {
+        let result = UITableView(frame: .zero, style: .grouped)
+        return result
+    }()
 
     var chatroom: ChatRoom!
 
@@ -49,6 +53,18 @@ final class DialogViewController: UIViewController {
         btn.setImage(UIImage(systemName: "arrow.down"), for: .normal)
         btn.tintColor = .black
         return btn
+    }()
+
+    private lazy var textView: UITextView = {
+        let result = UITextView()
+        result.setCorner(8)
+        result.setBorder(.gray)
+        result.backgroundColor = .blue
+        result.textColor = .black
+        result.font = .systemFont(ofSize: 16)
+        result.textAlignment = .left
+        result.isScrollEnabled = false
+        return result
     }()
 
     var opponent: User {
@@ -89,8 +105,8 @@ extension DialogViewController: TableBasicProtocol {
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.showsVerticalScrollIndicator = false
-
         tableView.sectionHeaderTopPadding = 0
+
 
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
@@ -100,17 +116,33 @@ extension DialogViewController: TableBasicProtocol {
 
 extension DialogViewController: Drawable {
     func setupUI() {
+        view.addSubview(tableView)
+        view.addSubview(textView)
         view.addSubview(scrollToBottomButton)
 
-        scrollToBottomButton.translatesAutoresizingMaskIntoConstraints = false
+        let textViewHeight = 60.0
 
         scrollToBottomButton.snp.makeConstraints { make in
-            make.bottom.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-(textViewHeight + 16))
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+
+        textView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-64)
+            make.height.lessThanOrEqualTo(textViewHeight)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-8)
+        }
+
+        tableView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-(8 + textViewHeight))
         }
     }
 
     func setupAttribute() {
         setupTable()
+        setTextView()
         setupNaviItem()
         setScrollBottomButton()
     }
@@ -125,8 +157,13 @@ extension DialogViewController: Drawable {
 
     @objc private func scrollBottomButtonTapped() {
         // 인덱스 기반
-        let index = IndexPath(row: chatroom!.messages.count - 1, section: 0)
+        let index = IndexPath(row: messages.last!.count - 1, section: messages.count-1)
         tableView.scrollToRow(at: index, at: .bottom, animated: false)
+    }
+
+    private func setTextView() {
+        textView.delegate = self
+        textView.backgroundColor = .white
     }
 }
 
@@ -189,5 +226,24 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         messages.count
+    }
+}
+
+extension DialogViewController: UITextViewDelegate {
+
+    func textViewDidChange(_ tv: UITextView) {
+        let size = CGSize(width: tv.bounds.width, height: .infinity)
+        let estimatedSize = tv.sizeThatFits(size)
+
+        let isMaxHeight = estimatedSize.height >= 40
+
+        guard isMaxHeight != tv.isScrollEnabled else { return }
+        tv.isScrollEnabled = isMaxHeight
+        tv.reloadInputViews()
+        tv.layoutIfNeeded()
+    }
+
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        textViewDidChange(textView)
     }
 }
