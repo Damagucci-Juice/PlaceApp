@@ -224,6 +224,10 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
             else { return UITableViewCell() }
             // configure
             othersChatCell.configure(msg)
+            othersChatCell.onImageViewTapped = { [weak self] opponent in
+                guard let self, let opponent else { return }
+                self.handleProfileImageViewTapped(opponent)
+            }
             cell = othersChatCell
         }
 
@@ -259,6 +263,11 @@ extension DialogViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         messages.count
+    }
+
+    func handleProfileImageViewTapped(_ opponent: User) {
+        let profileVC = UserProfileViewController(opponent)
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 }
 

@@ -19,6 +19,11 @@ final class OthersChatTableViewCell: UITableViewCell {
 
     @IBOutlet var timelineLabel: UILabel!
 
+    var onImageViewTapped: ((User?) -> Void)?
+
+    private var opponent: User?
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setupAttribute()
@@ -30,6 +35,8 @@ final class OthersChatTableViewCell: UITableViewCell {
         nameLabel.text = nil
         chatLabel.text = nil
         timelineLabel.text = nil
+        onImageViewTapped = nil
+        opponent = nil
     }
 }
 
@@ -40,8 +47,9 @@ extension OthersChatTableViewCell: CellBasicProtocol {
         guard let opponent = mockUsers.first(where: { $0.userId == item.senderId }),
               let imageURL = URL(string: opponent.profileImage)
         else { return }
-        profileImageView.kf.setImage(with: imageURL)
 
+        profileImageView.kf.setImage(with: imageURL)
+        self.opponent = opponent
         nameLabel.text = opponent.userName
         chatLabel.text = item.content
         timelineLabel.text = item.timestamp.timeInSouthKorea
@@ -70,6 +78,14 @@ extension OthersChatTableViewCell: Drawable {
                 )
 
         }
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        profileImageView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc
+    private func imageViewTapped() {
+        onImageViewTapped?(opponent)
     }
 }
 
