@@ -42,7 +42,7 @@ final class HotPlaceDetailViewController: UIViewController {
         result.spacing = interSpacing
 
         result.addArrangedSubview(makeImage("network"))
-        result.addArrangedSubview(makeLabel(tour.englishName))
+        result.addArrangedSubview(makeTextView(tour.englishName))
         return result
     }()
 
@@ -54,7 +54,7 @@ final class HotPlaceDetailViewController: UIViewController {
         result.spacing = interSpacing
 
         result.addArrangedSubview(makeImage("info.circle"))
-        result.addArrangedSubview(makeLabel(tour.city))
+        result.addArrangedSubview(makeTextView(tour.city))
         return result
     }()
 
@@ -66,7 +66,7 @@ final class HotPlaceDetailViewController: UIViewController {
         result.spacing = interSpacing
 
         result.addArrangedSubview(makeImage("map"))
-        result.addArrangedSubview(makeLabel(tour.address))
+        result.addArrangedSubview(makeTextView(tour.address))
         return result
     }()
 
@@ -78,7 +78,7 @@ final class HotPlaceDetailViewController: UIViewController {
         result.spacing = interSpacing
 
         result.addArrangedSubview(makeImage("phone.fill"))
-        result.addArrangedSubview(makeLabel(tour.phoneNumber))
+        result.addArrangedSubview(makeTextView(tour.phoneNumber))
         return result
     }()
 
@@ -90,7 +90,7 @@ final class HotPlaceDetailViewController: UIViewController {
         result.spacing = interSpacing
 
         result.addArrangedSubview(makeImage("safari"))
-        result.addArrangedSubview(makeLabel(tour.websiteURL))
+        result.addArrangedSubview(makeTextView(tour.websiteURL))
         return result
     }()
 
@@ -102,7 +102,7 @@ final class HotPlaceDetailViewController: UIViewController {
         result.spacing = interSpacing
 
         result.addArrangedSubview(makeImage("paperplane.circle"))
-        result.addArrangedSubview(makeLabel("\(tour.latitude), \(tour.longitude)"))
+        result.addArrangedSubview(makeTextView("\(tour.latitude), \(tour.longitude)"))
         return result
     }()
 
@@ -125,14 +125,17 @@ final class HotPlaceDetailViewController: UIViewController {
         setupNaviItem()
     }
 
-    private func makeLabel(_ title: String) -> UILabel {
-        let label = UILabel()
-        label.text = title
-        label.font = .systemFont(ofSize: 16)
-        label.textColor = .black
-        label.numberOfLines = 0
-        label.textAlignment = .left
-        return label
+    private func makeTextView(_ title: String) -> UITextView {
+        let result = UITextView()
+        result.text = title
+        result.font = .systemFont(ofSize: 16)
+        result.textColor = .black
+        result.dataDetectorTypes = [.address, .link, .phoneNumber]
+        result.isScrollEnabled = false
+        result.isSelectable = true
+        result.isEditable = false
+        result.textAlignment = .left
+        return result
     }
 
     private func makeImage(_ image: String) -> UIImageView {
