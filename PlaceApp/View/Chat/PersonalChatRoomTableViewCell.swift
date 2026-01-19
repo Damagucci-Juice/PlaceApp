@@ -17,6 +17,10 @@ final class PersonalChatRoomTableViewCell: UITableViewCell, Reusable {
     @IBOutlet var lastChatLabel: UILabel!
     @IBOutlet var updatedDateLabel: UILabel!
 
+    var onImageViewTapped: ((User?) -> Void)?
+
+    private var opponent: User?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,6 +33,8 @@ final class PersonalChatRoomTableViewCell: UITableViewCell, Reusable {
         nameLabel.text = nil
         lastChatLabel.text = nil
         updatedDateLabel.text = nil
+        onImageViewTapped = nil
+        opponent = nil
     }
 }
 
@@ -49,6 +55,15 @@ extension PersonalChatRoomTableViewCell: Drawable {
         nameLabel.likeTitle()
         lastChatLabel.likeSubheader()
         updatedDateLabel.likeSecondary()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        profileImageView.addGestureRecognizer(tapGesture)
+        profileImageView.isUserInteractionEnabled = true
+    }
+
+    @objc
+    func imageViewTapped() {
+        print(#function)
+        onImageViewTapped?(opponent)
     }
 }
 
@@ -62,6 +77,7 @@ extension PersonalChatRoomTableViewCell: CellBasicProtocol {
             print(#function, "No User")
             return
         }
+        self.opponent = opponent
         let counterImage = URL(string:  opponent.profileImage)!
 
         profileImageView.kf.setImage(with: counterImage)

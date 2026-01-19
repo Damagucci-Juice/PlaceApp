@@ -45,13 +45,19 @@ extension ChatsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PersonalChatRoomTableViewCell.identifier, for: indexPath) as? PersonalChatRoomTableViewCell else { return UITableViewCell() }
 
         cell.configure(datasource[indexPath.row])
-
+        cell.onImageViewTapped = { [weak self] opponent in
+            guard let self, let opponent else { return }
+            self.handleProfileImageViewTapped(opponent)
+        }
         cell.selectionStyle = .none
 
         return cell
     }
-    
 
+    func handleProfileImageViewTapped(_ opponent: User) {
+        let profileVC = UserProfileViewController(opponent)
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
 }
 
 extension ChatsViewController: TableBasicProtocol {

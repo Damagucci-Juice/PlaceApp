@@ -81,10 +81,12 @@ extension OthersChatTableViewCell: Drawable {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
         profileImageView.addGestureRecognizer(tapGesture)
+        profileImageView.isUserInteractionEnabled = true
     }
 
     @objc
-    private func imageViewTapped() {
+    func imageViewTapped() {
+        print(#function)
         onImageViewTapped?(opponent)
     }
 }
