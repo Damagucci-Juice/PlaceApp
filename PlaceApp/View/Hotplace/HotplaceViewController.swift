@@ -112,4 +112,10 @@ extension HotplaceViewController: UICollectionViewDelegate, UICollectionViewData
         }
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = TouristSpotInfo.spots[indexPath.item]
+        let vc = HotPlaceDetailViewController(item)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

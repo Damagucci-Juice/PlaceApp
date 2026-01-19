@@ -27,13 +27,13 @@ final class InsetLabel: UILabel {
         return CGSize(width: width, height: height)
     }
 
+    // MARK: -
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let size = super.sizeThatFits(size)
         let width = size.width + contentInsets.left + contentInsets.right
         let height = size.height + contentInsets.top + contentInsets.bottom
         return CGSize(width: width, height: height)
     }
-
 }
 
 extension InsetLabel {
